@@ -1,0 +1,293 @@
+---
+title: "`r params$module`"  # Do NOT change this line
+subtitle: "`r params$shorttitle`"  # Do NOT change this line
+author: "`r params$instructor`"  # Do NOT change this line
+date: "`r params$semester`"  # Do NOT change this line
+params:
+  module: "Causality in data science education"  # Enter HERE the name of the presentation/course/module
+  semester: "Causal Data Science Meeting"   # Enter HERE the date/semester/term
+  shorttitle: ""  # Enter HERE a subtitle/shorttitle
+  foottitle: "2020-11-12"  # Enter HERE a title for footline
+  instructor: "Karsten Lübke"  # ENTER here the presentator's/instructor's name
+output:
+  xaringan::moon_reader:
+    includes:
+      after_body: insert-logo.html
+    lib_dir: libs
+    css: ["footer-header.css", "xafom.css"]
+    nature:
+      titleSlideClass: [middle, right]
+      ratio: "4:3"  # Note that currently only 4:3 format is supported
+---
+
+
+layout: true
+  
+<div class="my-header"></div>
+
+<!-- the following lines define the header and the footer line: -->
+<div class="my-footer"><span>`r params$semester`    
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+`r params$instructor` | `r params$foottitle` </span></div> 
+
+<div class="footer-line"></div>
+
+
+
+```{r setup, include=FALSE}
+library(emojifont)
+library(knitr)
+library(tidyverse)
+library(lubridate)
+library(janitor)
+
+# Read in data
+Survey <- readr::read_csv("data/results-survey411257.csv", 
+                          col_types = cols(submitdate = col_datetime(format = "%Y-%m-%d %H:%M:%S"), 
+                                           startdate = col_datetime(format = "%Y-%m-%d %H:%M:%S"), 
+                                           datestamp = col_datetime(format = "%Y-%m-%d %H:%M:%S")))
+
+# Data preprocess
+Survey <- Survey %>%
+  mutate(Datum = date(datestamp)) %>%
+  select(Datum, C1, C2) %>%
+  na.omit() %>%
+  mutate(C1.Correct = ifelse(C1=="do not know", TRUE, FALSE),
+         C2.Correct = ifelse(C2=="y will increase", TRUE, FALSE)) %>%
+  rename("Without DAG" = C1, "With DAG" = C2) %>%
+  filter(Datum == "2020-02-11")
+
+
+theme.fom <- theme_classic(22*1.04)
+theme.fom <- theme.fom
+theme_set(
+  theme.fom  
+)
+options(scipen=999)
+
+
+```
+
+---
+
+## Intro: Inference from data analysis
+
+Please take part in a (very) short survey: [https://bit.ly/30sJNbm](https://bit.ly/30sJNbm)
+
+```{r echo=FALSE, out.width = "40%", fig.align="center"}
+include_graphics("img/Inferenz.jpg")
+```
+
+---
+
+## What is infered?
+
+Real SCM:
+
+$$X_1 = U_{X_1}, \quad U_{X_1} \sim \mathcal{N}(0,\,10),$$
+$$X_2 = -2X_1+U_{X_2}, \quad U_{X_2} \sim \mathcal{N}(0,\,1),$$
+$$Y = 5X_1+X_2+U_Y, \quad U_{Y} \sim  \mathcal{N}(0,\,5).$$
+
+Based on OLS table with either including $x_1$ or not: 
+
+.center[*What do you think is the result on $y$ if you increase $x_2$ (by means of an intervention)?*]
+
+Convenience sample taken at the [4. Data Science Forum in Düsseldorf](https://www.fom.de/2020/februar/4-data-science-forum-in-duesseldorf-fotografiertes-essen-schmeckt-besser.html):
+
+
+---
+
+## Why we sould teach it?
+
+.large[[EDC Oceans of Data Institute (2016)](http://oceansofdata.org/sites/oceansofdata.org/files/ODI%20Data%20Literacy%20Report_0.pdf):
+
+The data-literate individual understands,  explains, and documents the utility and  limitations of data by becoming a critical consumer of data, controlling his/her personal data trail, finding meaning in data, and taking action based on data. The data-literate individual can identify, collect, evaluate, analyze, interpret, present, and protect data.]
+
+---
+
+class: center, inverse, middle
+
+# Some more words about <br> data science <br> and <br> causal inference
+
+---
+
+## Data science tasks
+
+.center[<iframe src="https://giphy.com/embed/A06UFEx8jxEwU" width="240" height="177" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>]
+
+.small[[via GIPHY](https://giphy.com/gifs/code-matrix-wallpaper-A06UFEx8jxEwU)]
+
+
+-  [Shmueli (2010)](https://projecteuclid.org/euclid.ss/1294167961) asked: *To Explain or to Predict?*
+
+-  [Hernán et al. (2019)](https://doi.org/10.1080/09332480.2019.1579578) distinguished:
+   - **Description**: "How can women aged 60–80 years with stroke history be partitioned in classes defined by their characteristics?"
+   - **Prediction**: "What is the probability of having a stroke next year for women with certain characteristics?"
+   - **Causal inference**: 	"Will starting a statin reduce, on average, the risk of stroke in women with certain characteristics?"
+
+---
+
+## Fall of data science
+
+.pull-left[[Smith and Cordes (2019). *The 9 Pitfalls of Data Science*](https://global.oup.com/academic/product/the-9-pitfalls-of-data-science-9780198844396):
+
+1.  Using Bad Data
+
+2.  Putting Data Before Theory
+
+3.  Worshipping Math
+
+4.  Worshipping Computers
+
+5.  Torturing Data
+
+6.  Fooling Yourself
+
+7.  Confusing Correlation with Causation
+
+8.  Being Surprised by Regression Toward the Mean
+
+9.  Doing Harm]
+
+
+.pull-right[[De	Veaux	(2017). *Seven	Deadly	Sins	of	Big	Data*](http://www.falltechnicalconference.org/wp-content/uploads/2017_Presentations/2A-1-De-Veaux-Seven-Deadly-Sins.pdf):
+
+1. Failing to Define the Problem
+
+2. Underestimating Data Preparation
+
+3. Ignoring What’s Not There
+
+4. Falling in Love With Your Models
+
+5. Using	Bad	Data
+
+6. Confusing Correlation and Causation
+
+7. Not Taking Your Anti-Hubristines]
+
+---
+
+## Data clown (?)
+
+.center[<iframe width="560" height="315" align="middle" src="https://www.youtube.com/embed/uHGlCi9jOWY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>]
+
+> But it's a shallow journey if ONLY the machine's learning
+
+
+---
+
+class: center, inverse, middle
+
+# Teaching causal inference
+
+---
+
+## Call for action
+
+.large[[Witmer (2020)](https://doi.org/10.1080/00029890.2020.1671757): 
+
+The  scientific  community  would  benefit  greatly  from  a  better  understanding of causal inference - and "better" is quite a low bar, given how little the tools of causal reasoning have been used over the years. But statisticians have stood in the way, insisting that cause-and-effect conclusions can only be drawn from randomized experiments and delighting in telling stories about confounded effects that arise when analyzing observational data, all while repeating the  mantra  that correlation is  not  causation. In so doing, we statisticians congratulate ourselves too much, while turning students away from asking and answering questions of genuine interest.]
+
+---
+
+## Changing (statistics) curriculum 
+
+[Cobb (2015)](https://doi.org/10.1080/00031305.2015.1093029):
+
+> Mere Renovation is Too Little Too Late: We Need to Rethink our Undergraduate Curriculum from the Ground Up
+
+--
+
+Influenced by [GAISE (2016)](https://www.amstat.org/asa/files/pdfs/GAISE/GaiseCollege_Full.pdf), but also [Kaplan (2018)](https://doi.org/10.1080/00031305.2017.1398107) and [Schield (2018)](http://www.statlit.org/pdf/2018-Schield-ICOTS.pdf):
+
+- [Wild and Pfannkuch (1999)](https://doi.org/10.1111/j.1751-5823.1999.tb00442.x). Statistical Thinking in Empirical Enquiry
+- Blog [Lindeløv (2019)](https://lindeloev.github.io/tests-as-linear/). Common statistical tests are linear models (or: how to teach stats)
+- [Pruim, Kaplan and Horton (2017)](https://journal.r-project.org/archive/2017/RJ-2017-024/index.html). The mosaic Package: Helping Students to 'Think with Data' Using R
+- [Rossman and Chance (2014)](https://doi.org/10.1002/wics.1302). Using simulation‐based inference for learning introductory statistics (cf. Blog [Downey (2018)](https://allendowney.blogspot.com/2018/06/inference-in-three-hours.html)).
+
+Together with [Reproducible Analysis](https://escholarship.org/uc/item/90b2f5xh), [Quizzes](https://escholarship.org/uc/item/2503w2np), [Fun Elements](https://doi.org/10.1080/10691898.2016.1190190), [shiny](https://shiny.rstudio.com/) and [learnr](https://rstudio.github.io/learnr/) apps.
+
+Inspired by e.g. the `r icon::ai("open-access")`-books [Open Intro (ISRS)](https://www.openintro.org/book/isrs/), [ModernDive](https://moderndive.com/), [Statistical Modeling (2e)](https://dtkaplan.github.io/SM2-bookdown/) and [Data 8](http://data8.org/).
+
+
+---
+
+## What we teach
+
+---
+
+
+## [Asking questions](https://askgoodquestions.blog/)
+
+```{r, echo= FALSE , out.width = "15%", fig.align="center"}
+ggplot() + geom_emoji("thinking") + theme_void()
+```
+
+- Is it a good idea to show oversimplified examples in class? Real causal inference is much harder.
+
+- Are we overstraining our students?
+
+- Simulated data, really?
+
+- What about the topics ommited: Is causal inference making up the opportunity costs?
+
+- What happens if our students change university and have learned different topics than in a consensus curriculum?
+
+- Is it a good idea to teach something that most of us have not learned as a student?
+
+- On the other hand, are we answering the important questions for data literacy in the consensus curriculum?
+
+---
+
+class: center, inverse, middle
+
+# Outro
+
+---
+
+## Acknowledgment
+
+This is joint work with
+
+Matthias Gehrke, Jörg Horst, Gero Szepannek
+
+.center[
+```{r out.width='15%', fig.show='hold', echo=FALSE}
+knitr::include_graphics(c("img/matthias.jpeg", "img/joerg.png", "img/gero.jpg"))
+```
+]
+
+Your presenter:
+
+```{r out.width='15%', echo=FALSE, fig.align='center'}
+knitr::include_graphics(c("img/karsten.png"))
+```
+
+<br>
+
+And contributions to changing curriculum by Bianca Krol and Sebastian Sauer.
+
+---
+
+## Own Work and contact
+
+- [Lübke, K., Gehrke, M., Horst, J. & Szepannek, G. (2020). Why We Should Teach Causal Inference: Examples in Linear Regression with Simulated Data, Journal of Statistics Education.](https://doi.org/10.1080/10691898.2020.1752859)
+
+- [Lübke, K. &  Gehrke, M. (2020). *Now is the Time for Causal Inference in Introductory Statistics*, Proceedings IASE 2020 Roundtable New Skills in the Changing World of Statistics Education (accepted).](https://iase-web.org/conference/roundtable20/)
+
+<br>
+
+- `r icon::ai("open-access")`-material for this tal: [https://github.com/luebby/CAUSE-Webinar](https://github.com/luebby/CAUSE-Webinar)
+
+<br>
+
+- `r icon::fa("envelope")`: [karsten.luebke@fom.de](<mailto:karsten.luebke@fom.de>)
+- `r icon::fa("twitter")`: [@luebby42](https://twitter.com/luebby42)
+- `r icon::fa("github")`: [@luebby](https://github.com/luebby)
+
+<br>
+
+.center[.xlarge[Thank you!]]
+
