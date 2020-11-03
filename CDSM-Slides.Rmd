@@ -89,19 +89,28 @@ Real SCM:
 $$X_1 = U_{X_1}, \; U_{X_1} \sim \mathcal{N}(0,\,10), \quad X_2 = -2X_1+U_{X_2}, \; U_{X_2} \sim \mathcal{N}(0,\,1),$$
 $$Y = 5X_1+X_2+U_Y, \quad U_{Y} \sim  \mathcal{N}(0,\,5).$$
 
-Based on OLS table with either excluding $x_1$ ($\hat{\beta}^{(1)}_2=-1.505$) or including ($\hat{\beta}^{(2)}_2=0.909$): 
+Based on OLS table with either excluding $x_1$, $\hat{\beta}^{(1)}_2=-1.505$, or including $\hat{\beta}^{(2)}_2=0.909$: 
 
-What do you think is the result on $y$ if you increase $x_2$ (by means of an intervention)?
+*What do you think is the result on $y$ if you increase $x_2$ (by means of an intervention)?*
+
+<br>
 
 Convenience sample taken at the [4. Data Science Forum in Düsseldorf](https://www.fom.de/2020/februar/4-data-science-forum-in-duesseldorf-fotografiertes-essen-schmeckt-besser.html):
 
 
 ```{r, echo=FALSE}
-Survey %>%
+SurveyTable <- Survey %>%
   tabyl(`Without DAG`, `With DAG`) %>%
   adorn_totals(c("row", "col")) %>%
-  adorn_title("combined") %>%
-  kbl()
+  adorn_title("combined")
+
+SurveyTable %>%
+  kbl() %>%
+  column_spec(1, bold = TRUE) %>%
+  row_spec(1, background = "lightgreen") %>%
+  column_spec(4, background = "lightgreen") %>%
+  row_spec(4, italic = TRUE) %>%
+  column_spec(5, italic = TRUE)
 ```
 
 
@@ -288,7 +297,7 @@ And contributions to changing curriculum by Bianca Krol and Sebastian Sauer.
 
 <br>
 
-- `r icon::ai("open-access")`-material for this tal: [https://github.com/luebby/CAUSE-Webinar](https://github.com/luebby/CAUSE-Webinar)
+- `r icon::ai("open-access")`-material for this talk: [https://github.com/luebby/CDSM20](https://github.com/luebby/CDSM20)
 
 <br>
 
