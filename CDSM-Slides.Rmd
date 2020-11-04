@@ -82,7 +82,7 @@ include_graphics("img/Inferenz.jpg")
 
 ---
 
-## What is infered?
+## What is inferred?
 
 Real SCM:
 
@@ -116,7 +116,7 @@ SurveyTable %>%
 
 ---
 
-## Why we sould teach it?
+## Why we should teach it?
 
 .large[[EDC Oceans of Data Institute (2016)](http://oceansofdata.org/sites/oceansofdata.org/files/ODI%20Data%20Literacy%20Report_0.pdf):
 
@@ -341,7 +341,7 @@ knitr::include_graphics(c("img/matthias.jpeg", "img/joerg.png", "img/gero.jpg"))
 
 <br>
 
-And contributions to changing curriculum by Bianca Krol and Sebastian Sauer.
+And contributions to changing curriculum by Bianca Krol (FOM) and Sebastian Sauer (Hochschule Ansbach).
 
 ---
 
