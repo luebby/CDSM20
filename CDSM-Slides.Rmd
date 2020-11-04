@@ -146,6 +146,25 @@ class: center, inverse, middle
 
 ---
 
+## Levels of causal inference
+
+
+[Pearl (2019)](https://doi.org/10.1145/3241036) establishes a three-level hierarchy:
+
+- **Association**: $P(y|x)$: Seeing: *what is?*, i.e., the probability of $Y=y$ given that we observe $X=x$.
+
+- **Intervention**: $P(y|do(x))$: Manipulation: *what if?*, i.e., the probability of $Y=y$ given that we intervene and set the value of $X$ to $x$.
+
+- **Counterfactuals**: $P(y_x|x',y')$: Imagining: *what if I had acted differently?*, i.e., the probability of $Y=y$ if $X$ had been $x$ given that we actually observed $x',y'$.
+
+<br>
+
+Other approaches to causal inference are e.g. within potential outcome framework, instrumental variables, regression discontinuity designs, Granger, natural experiments, ...
+
+Compare also Cornfield's conditions and Bradford Hill criteria.
+
+---
+
 ## Fall of data science
 
 .pull-left[[Smith and Cordes (2019). *The 9 Pitfalls of Data Science*](https://global.oup.com/academic/product/the-9-pitfalls-of-data-science-9780198844396):
@@ -154,9 +173,9 @@ class: center, inverse, middle
 
 2.  Putting Data Before Theory
 
-3.  Worshipping Math
+3.  Worshiping Math
 
-4.  Worshipping Computers
+4.  Worshiping Computers
 
 5.  Torturing Data
 
@@ -210,13 +229,36 @@ The  scientific  community  would  benefit  greatly  from  a  better  understand
 
 ---
 
+## Learning Outcomes
+
+```{r, echo= FALSE , out.width = "15%", fig.align="center"}
+ggplot() + geom_emoji("woman_teacher") + theme_void()
+```
+
+To take the best action or causal conclusion based on multivariate (observational) data analysis:
+
+- Data is not just there - it has a generating process and we should care about this.
+
+- Confounding and bias can be serious issues for causal inference.
+
+- Adjusting or not adjusting: Both  can be bad ideas for causal inference.
+
+- Structural causal models and directed acyclic graphs can help to build a bridge between reality, theory and data.
+
+- Quantitative model checks may not reveal which model is best for causal inference.
+
+<br>
+
+`r icon::fa("hand-point-right", colour = "#00998A", size = 1.5)` For Intro Courses: Directed acyclic graphs may help to develop a framework to think about the data generating process and to make the assumptions discussible.
+
+---
+
 ## Changing (statistics) curriculum 
 
 [Cobb (2015)](https://doi.org/10.1080/00031305.2015.1093029):
 
 > Mere Renovation is Too Little Too Late: We Need to Rethink our Undergraduate Curriculum from the Ground Up
 
---
 
 Influenced by [GAISE (2016)](https://www.amstat.org/asa/files/pdfs/GAISE/GaiseCollege_Full.pdf), but also [Kaplan (2018)](https://doi.org/10.1080/00031305.2017.1398107) and [Schield (2018)](http://www.statlit.org/pdf/2018-Schield-ICOTS.pdf):
 
@@ -232,7 +274,27 @@ Inspired by e.g. the `r icon::ai("open-access")`-books [Open Intro (ISRS)](https
 
 ---
 
-## What we teach
+## Topics
+
+- Basic motivation by potential outcome.
+
+- Three-level hierarchy of causal inference, i.e. association, intervention and counterfactuals.
+
+- Conditional vs. marginal independence.
+
+- Basic elements of directed acyclic graphs, like chains, forks and collider.
+
+- Effects on (linear) regression estimates by adjusting or not adjusting (in `R`: `lm(y ~ x + c)` vs. `lm(y ~ x)`) by means of simulated examples.
+
+- Effect of a randomized controlled trial on estimates.
+
+<br>
+
+OER lecture slides (in German), Videos (in German), Workshop slides (in English) as well as `learnr` tutorials are available.
+
+<br> 
+
+.small[BTW: Nice Blogpost (with teaching example) by Kari Lock Morgan (2020): [Two questions to ask before making causal conclusions ](https://askgoodquestions.blog/2020/07/27/56-questioning-causal-evidence/)]
 
 ---
 
@@ -249,7 +311,7 @@ ggplot() + geom_emoji("thinking") + theme_void()
 
 - Simulated data, really?
 
-- What about the topics ommited: Is causal inference making up the opportunity costs?
+- What about the topics omitted: Is causal inference making up the opportunity costs?
 
 - What happens if our students change university and have learned different topics than in a consensus curriculum?
 
@@ -269,19 +331,13 @@ class: center, inverse, middle
 
 This is joint work with
 
-Matthias Gehrke, Jörg Horst, Gero Szepannek
+Matthias Gehrke (FOM), Jörg Horst (Fachhochschule Bielefeld), Gero Szepannek (Hochschule Stralsund)
 
 .center[
 ```{r out.width='15%', fig.show='hold', echo=FALSE}
 knitr::include_graphics(c("img/matthias.jpeg", "img/joerg.png", "img/gero.jpg"))
 ```
 ]
-
-Your presenter:
-
-```{r out.width='15%', echo=FALSE, fig.align='center'}
-knitr::include_graphics(c("img/karsten.png"))
-```
 
 <br>
 
