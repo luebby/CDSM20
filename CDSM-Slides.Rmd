@@ -114,7 +114,7 @@ SurveyTable %>%
 
 ---
 
-## Why we should teach it? Data Literacy
+## Why we should teach it? Data literacy
 
 .center[
 ```{r out.width='80%', echo=FALSE}
