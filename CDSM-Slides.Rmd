@@ -74,7 +74,7 @@ options(scipen=999)
 
 Please take part in a (very) short survey: [https://bit.ly/30sJNbm](https://bit.ly/30sJNbm)
 
-```{r echo=FALSE, out.width = "40%", fig.align="center"}
+```{r survey, echo=FALSE, out.width = "40%", fig.align="center"}
 include_graphics("img/Inferenz.jpg")
 ```
 
@@ -96,7 +96,7 @@ Based on linear regression results with either excluding $x_1$, $\hat{\beta}^{(1
 Convenience sample taken at the [4. Data Science Forum in Düsseldorf](https://www.fom.de/2020/februar/4-data-science-forum-in-duesseldorf-fotografiertes-essen-schmeckt-besser.html):
 
 
-```{r, echo=FALSE}
+```{r survey-results, echo=FALSE}
 SurveyTable <- Survey %>%
   tabyl(`Without DAG`, `With DAG`) %>%
   adorn_totals(c("row", "col")) %>%
@@ -117,7 +117,7 @@ SurveyTable %>%
 ## Why we should teach it? Data literacy
 
 .center[
-```{r out.width='80%', echo=FALSE}
+```{r dl-framework, out.width='80%', echo=FALSE}
 include_graphics(c("img/DL-Framework.png"))
 ```
 ]
@@ -233,7 +233,7 @@ The  scientific  community  would  benefit  greatly  from  a  better  understand
 
 ## Learning Outcomes
 
-```{r, echo= FALSE , out.width = "15%", fig.align="center"}
+```{r lo, echo= FALSE , out.width = "15%", fig.align="center"}
 ggplot() + geom_emoji("woman_teacher") + theme_void()
 ```
 
@@ -296,14 +296,14 @@ OER lecture slides (in German), Videos (in German), Workshop slides (in English)
 
 <br> 
 
-[BTW: Nice Blogpost (with teaching example) by Kari Lock Morgan (2020): [Two questions to ask before making causal conclusions](https://askgoodquestions.blog/2020/07/27/56-questioning-causal-evidence/)
+BTW: Nice Blogpost (with teaching example) by Kari Lock Morgan (2020): [Two questions to ask before making causal conclusions](https://askgoodquestions.blog/2020/07/27/56-questioning-causal-evidence/)
 
 ---
 
 
 ## Questions
 
-```{r, echo= FALSE , out.width = "15%", fig.align="center"}
+```{r question, echo= FALSE , out.width = "15%", fig.align="center"}
 ggplot() + geom_emoji("thinking") + theme_void()
 ```
 
@@ -336,7 +336,7 @@ This is joint work with
 Matthias Gehrke (FOM), Jörg Horst (Fachhochschule Bielefeld), Gero Szepannek (Hochschule Stralsund)
 
 .center[
-```{r out.width='15%', fig.show='hold', echo=FALSE}
+```{r coauthors, out.width='15%', fig.show='hold', echo=FALSE}
 include_graphics(c("img/matthias.jpeg", "img/joerg.png", "img/gero.jpg"))
 ```
 ]
