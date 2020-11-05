@@ -66,8 +66,6 @@ theme_set(
   theme.fom  
 )
 options(scipen=999)
-
-
 ```
 
 ---
@@ -84,12 +82,12 @@ include_graphics("img/Inferenz.jpg")
 
 ## What is inferred?
 
-Real SCM:
+Structual causal model:
 
 $$X_1 = U_{X_1}, \; U_{X_1} \sim \mathcal{N}(0,\,10), \quad X_2 = -2X_1+U_{X_2}, \; U_{X_2} \sim \mathcal{N}(0,\,1),$$
 $$Y = 5X_1+X_2+U_Y, \quad U_{Y} \sim  \mathcal{N}(0,\,5).$$
 
-Based on OLS table with either excluding $x_1$, $\hat{\beta}^{(1)}_2=-1.505$, or including $\hat{\beta}^{(2)}_2=0.909$: 
+Based on linear regression results with either excluding $x_1$, $\hat{\beta}^{(1)}_2=-1.505$, or including $\hat{\beta}^{(2)}_2=0.909$ - see survey: 
 
 *What do you think is the result on $y$ if you increase $x_2$ (by means of an intervention)?*
 
@@ -116,11 +114,15 @@ SurveyTable %>%
 
 ---
 
-## Why we should teach it?
+## Why we should teach it? Data Literacy
 
-.large[[EDC Oceans of Data Institute (2016)](http://oceansofdata.org/sites/oceansofdata.org/files/ODI%20Data%20Literacy%20Report_0.pdf):
+.center[
+```{r out.width='80%', echo=FALSE}
+include_graphics(c("img/DL-Framework.png"))
+```
+]
 
-The data-literate individual understands,  explains, and documents the utility and  limitations of data by becoming a critical consumer of data, controlling his/her personal data trail, finding meaning in data, and taking action based on data. The data-literate individual can identify, collect, evaluate, analyze, interpret, present, and protect data.]
+Source: [Schüller (2020)](https://hochschulforumdigitalisierung.de/sites/default/files/dateien/HFD_AP_Nr_53_Data_Literacy_Framework.pdf)
 
 ---
 
@@ -249,7 +251,7 @@ To take the best action or causal conclusion based on multivariate (observationa
 
 <br>
 
-`r icon::fa("hand-point-right", colour = "#00998A", size = 1.5)` For Intro Courses: Directed acyclic graphs may help to develop a framework to think about the data generating process and to make the assumptions discussible.
+`r icon::fa("hand-point-right", colour = "#00998A", size = 1.5)` For intro courses: Directed acyclic graphs may help to develop a framework to think about the data generating process and to make the assumptions discussible.
 
 ---
 
@@ -286,7 +288,7 @@ Inspired by e.g. the `r icon::ai("open-access")`-books [Open Intro (ISRS)](https
 
 - Effects on (linear) regression estimates by adjusting or not adjusting (in `R`: `lm(y ~ x + c)` vs. `lm(y ~ x)`) by means of simulated examples.
 
-- Effect of a randomized controlled trial on estimates.
+- Effect of a randomized controlled trial and selection bias on estimates.
 
 <br>
 
@@ -294,12 +296,12 @@ OER lecture slides (in German), Videos (in German), Workshop slides (in English)
 
 <br> 
 
-.small[BTW: Nice Blogpost (with teaching example) by Kari Lock Morgan (2020): [Two questions to ask before making causal conclusions ](https://askgoodquestions.blog/2020/07/27/56-questioning-causal-evidence/)]
+[BTW: Nice Blogpost (with teaching example) by Kari Lock Morgan (2020): [Two questions to ask before making causal conclusions](https://askgoodquestions.blog/2020/07/27/56-questioning-causal-evidence/)
 
 ---
 
 
-## [Asking questions](https://askgoodquestions.blog/)
+## Questions
 
 ```{r, echo= FALSE , out.width = "15%", fig.align="center"}
 ggplot() + geom_emoji("thinking") + theme_void()
@@ -335,7 +337,7 @@ Matthias Gehrke (FOM), Jörg Horst (Fachhochschule Bielefeld), Gero Szepannek (H
 
 .center[
 ```{r out.width='15%', fig.show='hold', echo=FALSE}
-knitr::include_graphics(c("img/matthias.jpeg", "img/joerg.png", "img/gero.jpg"))
+include_graphics(c("img/matthias.jpeg", "img/joerg.png", "img/gero.jpg"))
 ```
 ]
 
