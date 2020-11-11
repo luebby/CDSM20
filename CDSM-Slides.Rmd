@@ -229,6 +229,8 @@ class: center, inverse, middle
 
 The  scientific  community  would  benefit  greatly  from  a  better  understanding of causal inference - and "better" is quite a low bar, given how little the tools of causal reasoning have been used over the years. But statisticians have stood in the way, insisting that cause-and-effect conclusions can only be drawn from randomized experiments and delighting in telling stories about confounded effects that arise when analyzing observational data, all while repeating the  mantra  that correlation is  not  causation. In so doing, we statisticians congratulate ourselves too much, while turning students away from asking and answering questions of genuine interest.]
 
+See also [Greenland (2020)](https://arxiv.org/abs/2011.02677).
+
 ---
 
 ## Learning Outcomes
@@ -296,7 +298,7 @@ OER lecture slides (in German), Videos (in German), Workshop slides (in English)
 
 <br> 
 
-BTW: Nice Blogpost (with teaching example) by Kari Lock Morgan (2020): [Two questions to ask before making causal conclusions](https://askgoodquestions.blog/2020/07/27/56-questioning-causal-evidence/)
+BTW: Nice Blogpost (with teaching example) by [Kari Lock Morgan (2020): Two questions to ask before making causal conclusions](https://askgoodquestions.blog/2020/07/27/56-questioning-causal-evidence/)
 
 ---
 
@@ -320,6 +322,28 @@ ggplot() + geom_emoji("thinking") + theme_void()
 - Is it a good idea to teach something that most of us have not learned as a student?
 
 - On the other hand, are we answering the important questions for data literacy in the consensus curriculum?
+
+---
+
+## Rebut the "But, ...
+
+the correctness of causal conclusions is based on the correctness of the graph."
+
+--
+
+.center[<iframe src="https://giphy.com/embed/10Jpr9KSaXLchW" width="240" height="188" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>]
+
+.small[[via GIPHY](https://giphy.com/gifs/people-hd-gifsremastered-10Jpr9KSaXLchW), inspiration [`r icon::fa("twitter")` @rlmcelreath](https://twitter.com/rlmcelreath/status/1318113949074771968)]
+
+<br>
+
+As a friend once said (in a different context): 
+
+> You don‘t criticize Pythagoras for that you need to know two out of three sides to calculate the third in a right triangle.
+
+
+Same here. Unfortunately free lunch was sold out long ago.
+
 
 ---
 
