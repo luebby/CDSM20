@@ -78,20 +78,24 @@ Please take part in a (very) short survey: [https://bit.ly/30sJNbm](https://bit.
 include_graphics("img/Inferenz.jpg")
 ```
 
+`r icon::fa("share-alt")` Please contact me if you think you may conduct the survey yourself.
+
 ---
 
-## What is inferred?
+## Survey: What is inferred?
 
-Structual causal model:
+Structual causal model for data in survey question:
 
 $$X_1 = U_{X_1}, \; U_{X_1} \sim \mathcal{N}(0,\,10), \quad X_2 = -2X_1+U_{X_2}, \; U_{X_2} \sim \mathcal{N}(0,\,1),$$
 $$Y = 5X_1+X_2+U_Y, \quad U_{Y} \sim  \mathcal{N}(0,\,5).$$
 
-Based on linear regression results with either excluding $x_1$, $\hat{\beta}^{(1)}_2=-1.505$, or including $\hat{\beta}^{(2)}_2=0.909$ - see survey: 
+Based on linear regression result: 
 
-*What do you think is the result on $y$ if you increase $x_2$ (by means of an intervention)?*
+- $\hat{\beta}^{(1)}_2=-1.505$ (excluding $x_1$)
 
-<br>
+- $\hat{\beta}^{(2)}_2=0.909$  (including $x_1$) 
+
+> What do you think is the result on $y$ if you increase $x_2$ (by means of an intervention)?
 
 Convenience sample taken at the [4. Data Science Forum in Düsseldorf](https://www.fom.de/2020/februar/4-data-science-forum-in-duesseldorf-fotografiertes-essen-schmeckt-besser.html):
 
@@ -233,6 +237,18 @@ See also [Greenland (2020)](https://arxiv.org/abs/2011.02677).
 
 ---
 
+## Call for action - update
+
+Screenshot of **Carla Schmitt**'s slides at this meeting yesterday: 
+
+.center[
+```{r schmitt, out.width='80%', echo=FALSE}
+include_graphics(c("img/CDSM-Schmitt.png"))
+```
+]
+
+---
+
 ## Learning Outcomes
 
 ```{r lo, echo= FALSE , out.width = "15%", fig.align="center"}
@@ -337,7 +353,7 @@ the correctness of causal conclusions is based on the correctness of the graph."
 
 <br>
 
-As a friend once said (in a different context): 
+Is (unconscious?) wishful thinking really better? As Christian Röver once said (in a Bayesian context): 
 
 > You don‘t criticize Pythagoras for that you need to know two out of three sides to calculate the third in a right triangle.
 
